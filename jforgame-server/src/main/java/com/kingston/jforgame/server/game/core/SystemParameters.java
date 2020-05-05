@@ -19,7 +19,7 @@ public class SystemParameters {
 	public static volatile long dailyResetTimestamp;
 
 	public static synchronized void load() throws Exception {
-		String sql = "SELECT * FROM `systemrecord`";
+		String sql = "SELECT * FROM `serverrecord`";
 		List<Map<String, Object>> datas = DbUtils.queryMapList(DbUtils.DB_USER, sql);
 
 		// 给所有field填值
@@ -71,7 +71,7 @@ public class SystemParameters {
 
 	private static synchronized void saveToDb(String key, String value) {
 		// 入库
-		String sql = "UPDATE `systemrecord` SET `value`='" + value + "' WHERE `key`='" + key + "'";
+		String sql = "UPDATE `serverrecord` SET `value`='" + value + "' WHERE `key`='" + key + "'";
 		try {
 			DbUtils.executeSql(sql);
 		} catch (Exception e) {

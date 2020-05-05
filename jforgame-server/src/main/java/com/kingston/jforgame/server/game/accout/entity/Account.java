@@ -12,10 +12,10 @@ import com.kingston.jforgame.server.utils.IdGenerator;
 public class Account extends BaseEntity  {
 	
 	@Id
-	@Column
+	@Column(length = 32)
 	private long id;
 	
-	@Column
+	@Column(length = 32)
 	private String name;
 	
 	public Account() {

@@ -7,6 +7,10 @@ import com.kingston.jforgame.orm.cache.AbstractCacheable;
 
 public class SqlUtils {
 
+    public static String getCreateTableSql(OrmBridge bridge) {
+        return SqlFactory.createTable(bridge);
+    }
+
 	public static String getInsertSql(AbstractCacheable entity) {
 		OrmBridge bridge = OrmProcessor.INSTANCE.getOrmBridge(entity.getClass());
 		return SqlFactory.createInsertSql(entity, bridge);

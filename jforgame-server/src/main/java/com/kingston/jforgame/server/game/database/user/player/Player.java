@@ -18,177 +18,178 @@ import com.kingston.jforgame.socket.task.Distributable;
 
 /**
  * 玩家实体
+ *
  * @author kingston
  */
 @Entity
 public class Player extends BaseEntity implements Distributable {
 
-	private static final long serialVersionUID = 8913056963732639062L;
+    private static final long serialVersionUID = 8913056963732639062L;
 
-	@Id
-	@Column
-	private long id;
-	
-	@Column
-	private long accountId;
+    @Id
+    @Column(length = 32)
+    private long id;
 
-	@Column
-	private String name;
+    @Column(length = 32)
+    private long accountId;
 
-	/**
-	 * 职业
-	 */
-	@Column
-	private int job;
+    @Column(length = 128)
+    private String name;
 
-	@Column
-	private int level;
+    /**
+     * 职业
+     */
+    @Column(length = 6)
+    private int job;
 
-	@Column
-	private long exp;
+    @Column(length = 11)
+    private int level;
 
-	/**
-	 * 上一次每日重置的时间戳
-	 */
-	@Column
-	private long lastDailyReset;
+    @Column(length = 32)
+    private long exp;
 
-	private VipRight vipRight;
+    /**
+     * 上一次每日重置的时间戳
+     */
+    @Column
+    private long lastDailyReset;
 
-	@Column
-	private String vipRightJson;
+    private VipRight vipRight;
 
-	@Column
-	private Platform platform;
+    @Column
+    private String vipRightJson;
 
-//	@Column
-	private String functionJson;
-	
-	private Function function;
+    @Column
+    private Platform platform;
 
-	public Player() {
-		this.id = IdGenerator.getNextId();
-	}
+    //	@Column
+    private String functionJson;
 
-	@Override
-	public long getId() {
-		return id;
-	}
+    private Function function;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public Player() {
+        this.id = IdGenerator.getNextId();
+    }
 
-	public String getName() {
-		return name;
-	}
+    @Override
+    public long getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public int getJob() {
-		return job;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setJob(int job) {
-		this.job = job;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public int getLevel() {
-		return level;
-	}
+    public int getJob() {
+        return job;
+    }
 
-	public void setLevel(int level) {
-		this.level = level;
-	}
+    public void setJob(int job) {
+        this.job = job;
+    }
 
-	public long getExp() {
-		return exp;
-	}
+    public int getLevel() {
+        return level;
+    }
 
-	public void setExp(long exp) {
-		this.exp = exp;
-	}
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
-	public long getLastDailyReset() {
-		return lastDailyReset;
-	}
+    public long getExp() {
+        return exp;
+    }
 
-	public void setLastDailyReset(long lastDailyReset) {
-		this.lastDailyReset = lastDailyReset;
-	}
+    public void setExp(long exp) {
+        this.exp = exp;
+    }
+
+    public long getLastDailyReset() {
+        return lastDailyReset;
+    }
+
+    public void setLastDailyReset(long lastDailyReset) {
+        this.lastDailyReset = lastDailyReset;
+    }
 
 
-	public VipRight getVipRight() {
-		return vipRight;
-	}
+    public VipRight getVipRight() {
+        return vipRight;
+    }
 
-	public void setVipRight(VipRight vipRight) {
-		this.vipRight = vipRight;
-	}
+    public void setVipRight(VipRight vipRight) {
+        this.vipRight = vipRight;
+    }
 
-	public String getVipRightJson() {
-		return vipRightJson;
-	}
+    public String getVipRightJson() {
+        return vipRightJson;
+    }
 
-	public void setVipRightJson(String vipRightJson) {
-		this.vipRightJson = vipRightJson;
-	}
+    public void setVipRightJson(String vipRightJson) {
+        this.vipRightJson = vipRightJson;
+    }
 
-	public Platform getPlatform() {
-		return platform;
-	}
+    public Platform getPlatform() {
+        return platform;
+    }
 
-	public void setPlatform(Platform platform) {
-		this.platform = platform;
-	}
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
+    }
 
-	public Function getFunction() {
-		return function;
-	}
+    public Function getFunction() {
+        return function;
+    }
 
-	public void setFunction(Function functions) {
-		this.function = functions;
-	}
+    public void setFunction(Function functions) {
+        this.function = functions;
+    }
 
-	public String getFunctionJson() {
-		return functionJson;
-	}
+    public String getFunctionJson() {
+        return functionJson;
+    }
 
-	public void setFunctionJson(String functionJson) {
-		this.functionJson = functionJson;
-	}
-	
-	public long getAccountId() {
-		return accountId;
-	}
+    public void setFunctionJson(String functionJson) {
+        this.functionJson = functionJson;
+    }
 
-	public void setAccountId(long accountId) {
-		this.accountId = accountId;
-	}
+    public long getAccountId() {
+        return accountId;
+    }
 
-	@Override
-	public void doAfterInit() {
-		PlayerSerializerUtil.deserialize(this);
-	}
+    public void setAccountId(long accountId) {
+        this.accountId = accountId;
+    }
 
-	@Override
-	public void doBeforeSave() {
-		PlayerSerializerUtil.serialize(this);
-	}
+    @Override
+    public void doAfterInit() {
+        PlayerSerializerUtil.deserialize(this);
+    }
 
-	@Override
-	public int distributeKey() {
+    @Override
+    public void doBeforeSave() {
+        PlayerSerializerUtil.serialize(this);
+    }
+
+    @Override
+    public int distributeKey() {
 //		IoSession session = SessionManager.INSTANCE.getSessionBy(id);
 //		return (int)session.getAttribute(SessionProperties.DISTRIBUTE_KEY);
-		return 0;
-	}
+        return 0;
+    }
 
-	@Override
-	public String toString() {
-		return "Player [id=" + id + ", name=" + name + ", job=" + job + ", level=" + level + ", exp=" + exp
-				+ ", lastDailyReset=" + lastDailyReset + ", vipRight=" + vipRight + ", platform=" + platform + "]";
-	}
+    @Override
+    public String toString() {
+        return "Player [id=" + id + ", name=" + name + ", job=" + job + ", level=" + level + ", exp=" + exp
+                + ", lastDailyReset=" + lastDailyReset + ", vipRight=" + vipRight + ", platform=" + platform + "]";
+    }
 
 }
