@@ -27,7 +27,6 @@ public class CommonScript {
 			}
 
 			// replace public method, in order to fix bug in product environment
-			@Override
 			public Player load(Long playerId) throws Exception {
 				sayHello();
 				Player newPlayer = new Player();
@@ -42,8 +41,8 @@ public class CommonScript {
 
 			field.set(PlayerManager.getInstance(), newMgr);
 
-			Player player = PlayerManager.getInstance().load(12345L);
-			System.err.println(player.getName());
+			//Player player = PlayerManager.getInstance().load(12345L);
+		//	System.err.println(player.getName());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

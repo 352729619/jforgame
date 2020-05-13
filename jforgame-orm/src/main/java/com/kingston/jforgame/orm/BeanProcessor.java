@@ -289,6 +289,9 @@ public class BeanProcessor
         if (propType.equals(SQLXML.class)) {
             return rs.getSQLXML(index);
         }
+        if(propType.equals(Object.class)){
+            return rs.getString(index);
+        }
         if (propType.isEnum()) {
         	return Enum.valueOf( (Class<? extends Enum>) propType, rs.getString(index));
         }

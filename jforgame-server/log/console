@@ -1,0 +1,246 @@
+[21:00:00][main] -  CREATE TABLE IF NOT EXISTS player (`id` bigint(32),`accountId` bigint(32),`name` varchar(128),`job` int(6),`level` int(11),`exp` bigint(32),`lastDailyReset` bigint(255),`vipRightJson` varchar(255),`platform` varchar(255),PRIMARY KEY(`id`) );
+[21:00:00][main] -  CREATE TABLE IF NOT EXISTS account (`id` bigint(32),`name` varchar(32),PRIMARY KEY(`id`) );
+[21:00:00][main] -  CREATE TABLE IF NOT EXISTS serverRecord (`key` varchar(255),`value` varchar(255),`comment` varchar(255),PRIMARY KEY(`key`) );
+[21:00:00][main] - 启动时每日重置
+[21:00:00][Shutdown Hook] - Shutting down 'data' pool immediately [Shutdown Hook]
+[21:00:00][Shutdown Hook] - Shutting down 'user' pool immediately [Shutdown Hook]
+[21:00:00][Shutdown Hook] - Stopping Prototyper thread
+[21:00:00][Shutdown Hook] - Stopping HouseKeeper thread
+[21:00:08][main] - 加载服务版本号成功, bigVersion=1, smallVersion=0
+[21:00:09][main] - 本服serverId为10001,后台端口为8080
+[21:00:09][main] - init database connection pool……
+[21:00:09][main] - Proxool 0.9.1 (23-Aug-2008 11:10)
+[21:00:09][main] - Using default implementation for ThreadExecutor
+[21:00:09][main] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+[21:00:09][main] - Quartz Scheduler v.2.2.1 created.
+[21:00:09][main] - Registering Quartz Job Initialization Plug-in.
+[21:00:09][main] - RAMJobStore initialized.
+[21:00:09][main] - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'QuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 30 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+[21:00:09][main] - Quartz scheduler 'QuartzScheduler' initialized from the specified file : 'jobs/quartz.properties' from the class resource path.
+[21:00:09][main] - Quartz scheduler version: 2.2.1
+[21:00:09][main] - Parsing XML file: jobs/Jobs.xml with systemId: jobs/Jobs.xml
+[21:00:09][main] - Adding 1 jobs, 1 triggers.
+[21:00:09][main] - Adding job: DEFAULT.DailyResetJob
+[21:00:09][main] - Scheduler QuartzScheduler_$_NON_CLUSTERED started.
+[21:00:10][main] -  CREATE TABLE IF NOT EXISTS player (`id` bigint(32),`accountId` bigint(32),`name` varchar(128),`job` int(6),`level` int(11),`exp` bigint(32),`lastDailyReset` bigint(255),`vipRightJson` varchar(255),`platform` varchar(255),PRIMARY KEY(`id`) );
+[21:00:10][main] -  CREATE TABLE IF NOT EXISTS account (`id` bigint(32),`name` varchar(32),PRIMARY KEY(`id`) );
+[21:00:10][main] -  CREATE TABLE IF NOT EXISTS serverRecord (`key` varchar(255),`value` varchar(255),`comment` varchar(255),PRIMARY KEY(`key`) );
+[21:00:10][main] - 启动时每日重置
+[21:00:12][main] - cross server start at port:9627,正在监听服务器点对点的连接...
+[21:00:12][main] - mina socket server start at port:9527,正在监听客户端的连接...
+[21:00:12][main] - DbUtils queryOne failed
+java.lang.IllegalArgumentException: No enum constant com.kingston.jforgame.server.game.login.model.Platform.xxx
+	at java.lang.Enum.valueOf(Enum.java:238)
+	at com.kingston.jforgame.orm.BeanProcessor.processColumn(BeanProcessor.java:296)
+	at com.kingston.jforgame.orm.BeanProcessor.createBean(BeanProcessor.java:97)
+	at com.kingston.jforgame.orm.BeanProcessor.toBean(BeanProcessor.java:64)
+	at com.kingston.jforgame.orm.utils.DbHelper.queryOne(DbHelper.java:81)
+	at com.kingston.jforgame.server.db.DbUtils.queryOneById(DbUtils.java:53)
+	at com.kingston.jforgame.server.dbmanager.LoadDBManager$PlayerCache.load(LoadDBManager.java:76)
+	at com.kingston.jforgame.server.dbmanager.LoadDBManager$PlayerCache.load(LoadDBManager.java:72)
+	at com.kingston.jforgame.server.cache.DefaultCacheContainer.loadFromDb(DefaultCacheContainer.java:16)
+	at com.kingston.jforgame.server.cache.DefaultCacheContainer.loadFromDb(DefaultCacheContainer.java:5)
+	at com.kingston.jforgame.server.cache.AbstractCacheContainer$DataLoader.load(AbstractCacheContainer.java:65)
+	at com.google.common.cache.LocalCache$LoadingValueReference.loadFuture(LocalCache.java:3527)
+	at com.google.common.cache.LocalCache$Segment.loadSync(LocalCache.java:2319)
+	at com.google.common.cache.LocalCache$Segment.lockedGetOrLoad(LocalCache.java:2282)
+	at com.google.common.cache.LocalCache$Segment.get(LocalCache.java:2197)
+	at com.google.common.cache.LocalCache.get(LocalCache.java:3937)
+	at com.google.common.cache.LocalCache.getOrLoad(LocalCache.java:3941)
+	at com.google.common.cache.LocalCache$LocalLoadingCache.get(LocalCache.java:4824)
+	at com.kingston.jforgame.server.cache.AbstractCacheContainer.get(AbstractCacheContainer.java:33)
+	at com.kingston.jforgame.server.cache.BaseCacheService.get(BaseCacheService.java:31)
+	at com.kingston.jforgame.server.dbmanager.LoadDBManager.getEntity(LoadDBManager.java:45)
+	at com.kingston.jforgame.server.GameServer.frameworkInit(GameServer.java:104)
+	at com.kingston.jforgame.server.GameServer.start(GameServer.java:54)
+	at com.kingston.jforgame.server.ServerStartup.main(ServerStartup.java:26)
+[21:00:12][main] - server start failed
+java.lang.NullPointerException
+	at com.kingston.jforgame.server.GameServer.frameworkInit(GameServer.java:105)
+	at com.kingston.jforgame.server.GameServer.start(GameServer.java:54)
+	at com.kingston.jforgame.server.ServerStartup.main(ServerStartup.java:26)
+[21:00:12][Shutdown Hook] - Shutting down 'data' pool immediately [Shutdown Hook]
+[21:00:12][Shutdown Hook] - Shutting down 'user' pool immediately [Shutdown Hook]
+[21:00:12][Shutdown Hook] - Stopping Prototyper thread
+[21:00:12][Shutdown Hook] - Stopping HouseKeeper thread
+[21:01:13][main] - 加载服务版本号成功, bigVersion=1, smallVersion=0
+[21:01:13][main] - 本服serverId为10001,后台端口为8080
+[21:01:13][main] - init database connection pool……
+[21:01:13][main] - Proxool 0.9.1 (23-Aug-2008 11:10)
+[21:01:13][main] - Using default implementation for ThreadExecutor
+[21:01:13][main] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+[21:01:13][main] - Quartz Scheduler v.2.2.1 created.
+[21:01:13][main] - Registering Quartz Job Initialization Plug-in.
+[21:01:13][main] - RAMJobStore initialized.
+[21:01:13][main] - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'QuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 30 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+[21:01:13][main] - Quartz scheduler 'QuartzScheduler' initialized from the specified file : 'jobs/quartz.properties' from the class resource path.
+[21:01:13][main] - Quartz scheduler version: 2.2.1
+[21:01:13][main] - Parsing XML file: jobs/Jobs.xml with systemId: jobs/Jobs.xml
+[21:01:13][main] - Adding 1 jobs, 1 triggers.
+[21:01:13][main] - Adding job: DEFAULT.DailyResetJob
+[21:01:13][main] - Scheduler QuartzScheduler_$_NON_CLUSTERED started.
+[21:01:14][main] -  CREATE TABLE IF NOT EXISTS player (`id` bigint(32),`accountId` bigint(32),`name` varchar(128),`job` int(6),`level` int(11),`exp` bigint(32),`lastDailyReset` bigint(255),`vipRightJson` varchar(255),`platform` varchar(255),PRIMARY KEY(`id`) );
+[21:01:14][main] -  CREATE TABLE IF NOT EXISTS account (`id` bigint(32),`name` varchar(32),PRIMARY KEY(`id`) );
+[21:01:14][main] -  CREATE TABLE IF NOT EXISTS serverRecord (`key` varchar(255),`value` varchar(255),`comment` varchar(255),PRIMARY KEY(`key`) );
+[21:01:14][main] - 启动时每日重置
+[21:01:16][main] - cross server start at port:9627,正在监听服务器点对点的连接...
+[21:01:16][main] - mina socket server start at port:9527,正在监听客户端的连接...
+[21:06:12][main] - DbUtils queryOne failed
+java.lang.IllegalArgumentException: No enum constant com.kingston.jforgame.server.game.login.model.Platform.xxx
+	at java.lang.Enum.valueOf(Enum.java:238)
+	at com.kingston.jforgame.orm.BeanProcessor.processColumn(BeanProcessor.java:296)
+	at com.kingston.jforgame.orm.BeanProcessor.createBean(BeanProcessor.java:97)
+	at com.kingston.jforgame.orm.BeanProcessor.toBean(BeanProcessor.java:64)
+	at com.kingston.jforgame.orm.utils.DbHelper.queryOne(DbHelper.java:81)
+	at com.kingston.jforgame.server.db.DbUtils.queryOneById(DbUtils.java:53)
+	at com.kingston.jforgame.server.dbmanager.LoadDBManager$PlayerCache.load(LoadDBManager.java:76)
+	at com.kingston.jforgame.server.dbmanager.LoadDBManager$PlayerCache.load(LoadDBManager.java:72)
+	at com.kingston.jforgame.server.cache.DefaultCacheContainer.loadFromDb(DefaultCacheContainer.java:16)
+	at com.kingston.jforgame.server.cache.DefaultCacheContainer.loadFromDb(DefaultCacheContainer.java:5)
+	at com.kingston.jforgame.server.cache.AbstractCacheContainer$DataLoader.load(AbstractCacheContainer.java:65)
+	at com.google.common.cache.LocalCache$LoadingValueReference.loadFuture(LocalCache.java:3527)
+	at com.google.common.cache.LocalCache$Segment.loadSync(LocalCache.java:2319)
+	at com.google.common.cache.LocalCache$Segment.lockedGetOrLoad(LocalCache.java:2282)
+	at com.google.common.cache.LocalCache$Segment.get(LocalCache.java:2197)
+	at com.google.common.cache.LocalCache.get(LocalCache.java:3937)
+	at com.google.common.cache.LocalCache.getOrLoad(LocalCache.java:3941)
+	at com.google.common.cache.LocalCache$LocalLoadingCache.get(LocalCache.java:4824)
+	at com.kingston.jforgame.server.cache.AbstractCacheContainer.get(AbstractCacheContainer.java:33)
+	at com.kingston.jforgame.server.cache.BaseCacheService.get(BaseCacheService.java:31)
+	at com.kingston.jforgame.server.dbmanager.LoadDBManager.getEntity(LoadDBManager.java:45)
+	at com.kingston.jforgame.server.GameServer.frameworkInit(GameServer.java:104)
+	at com.kingston.jforgame.server.GameServer.start(GameServer.java:54)
+	at com.kingston.jforgame.server.ServerStartup.main(ServerStartup.java:26)
+[21:06:12][main] - server start failed
+java.lang.NullPointerException
+	at com.kingston.jforgame.server.GameServer.frameworkInit(GameServer.java:105)
+	at com.kingston.jforgame.server.GameServer.start(GameServer.java:54)
+	at com.kingston.jforgame.server.ServerStartup.main(ServerStartup.java:26)
+[21:06:12][Shutdown Hook] - Shutting down 'data' pool immediately [Shutdown Hook]
+[21:06:12][Shutdown Hook] - Shutting down 'user' pool immediately [Shutdown Hook]
+[21:06:12][Shutdown Hook] - Stopping Prototyper thread
+[21:06:12][Shutdown Hook] - Stopping HouseKeeper thread
+[21:08:53][main] - init database connection pool……
+[21:08:53][main] - Proxool 0.9.1 (23-Aug-2008 11:10)
+[21:08:53][main] -  CREATE TABLE IF NOT EXISTS account (`id` bigint(32),`name` varchar(32),PRIMARY KEY(`id`) );
+[21:08:54][main] -  CREATE TABLE IF NOT EXISTS player (`id` bigint(32),`accountId` bigint(32),`name` varchar(128),`job` int(6),`level` int(11),`exp` bigint(32),`lastDailyReset` bigint(255),`vipRightJson` varchar(255),`platformJson` varchar(255),PRIMARY KEY(`id`) );
+[21:08:55][main] -  CREATE TABLE IF NOT EXISTS serverRecord (`key` varchar(255),`value` varchar(255),`comment` varchar(255),PRIMARY KEY(`key`) );
+[21:08:55][main] - 本服serverId为10001,后台端口为8080
+[21:08:55][Shutdown Hook] - Shutting down 'user' pool immediately [Shutdown Hook]
+[21:08:55][Shutdown Hook] - Shutting down 'data' pool immediately [Shutdown Hook]
+[21:08:55][Shutdown Hook] - Stopping Prototyper thread
+[21:08:55][Shutdown Hook] - Stopping HouseKeeper thread
+[21:09:34][main] - init database connection pool……
+[21:09:34][main] - Proxool 0.9.1 (23-Aug-2008 11:10)
+[21:09:34][main] -  CREATE TABLE IF NOT EXISTS account (`id` bigint(32),`name` varchar(32),PRIMARY KEY(`id`) );
+[21:09:35][main] -  CREATE TABLE IF NOT EXISTS player (`id` bigint(32),`accountId` bigint(32),`name` varchar(128),`job` int(6),`level` int(11),`exp` bigint(32),`lastDailyReset` bigint(255),`vipRightJson` varchar(255),`platformJson` varchar(255),PRIMARY KEY(`id`) );
+[21:09:35][main] -  CREATE TABLE IF NOT EXISTS serverRecord (`key` varchar(255),`value` varchar(255),`comment` varchar(255),PRIMARY KEY(`key`) );
+[21:09:35][main] - 本服serverId为10001,后台端口为8080
+[21:09:36][Shutdown Hook] - Shutting down 'user' pool immediately [Shutdown Hook]
+[21:09:36][Shutdown Hook] - Shutting down 'data' pool immediately [Shutdown Hook]
+[21:09:36][Shutdown Hook] - Stopping Prototyper thread
+[21:09:36][Shutdown Hook] - Stopping HouseKeeper thread
+[21:10:21][main] - 加载服务版本号成功, bigVersion=1, smallVersion=0
+[21:10:22][main] - 本服serverId为10001,后台端口为8080
+[21:10:22][main] - init database connection pool……
+[21:10:22][main] - Proxool 0.9.1 (23-Aug-2008 11:10)
+[21:10:22][main] - Using default implementation for ThreadExecutor
+[21:10:22][main] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+[21:10:22][main] - Quartz Scheduler v.2.2.1 created.
+[21:10:22][main] - Registering Quartz Job Initialization Plug-in.
+[21:10:22][main] - RAMJobStore initialized.
+[21:10:22][main] - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'QuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 30 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+[21:10:22][main] - Quartz scheduler 'QuartzScheduler' initialized from the specified file : 'jobs/quartz.properties' from the class resource path.
+[21:10:22][main] - Quartz scheduler version: 2.2.1
+[21:10:22][main] - Parsing XML file: jobs/Jobs.xml with systemId: jobs/Jobs.xml
+[21:10:22][main] - Adding 1 jobs, 1 triggers.
+[21:10:22][main] - Adding job: DEFAULT.DailyResetJob
+[21:10:22][main] - Scheduler QuartzScheduler_$_NON_CLUSTERED started.
+[21:10:23][main] -  CREATE TABLE IF NOT EXISTS serverRecord (`key` varchar(255),`value` varchar(255),`comment` varchar(255),PRIMARY KEY(`key`) );
+[21:10:23][main] -  CREATE TABLE IF NOT EXISTS player (`id` bigint(32),`accountId` bigint(32),`name` varchar(128),`job` int(6),`level` int(11),`exp` bigint(32),`lastDailyReset` bigint(255),`vipRightJson` varchar(255),`platformJson` varchar(255),PRIMARY KEY(`id`) );
+[21:10:23][main] -  CREATE TABLE IF NOT EXISTS account (`id` bigint(32),`name` varchar(32),PRIMARY KEY(`id`) );
+[21:10:23][main] - 启动时每日重置
+[21:10:25][main] - cross server start at port:9627,正在监听服务器点对点的连接...
+[21:10:25][main] - mina socket server start at port:9527,正在监听客户端的连接...
+[21:10:25][main] - 游戏服务启动，耗时[4182]毫秒
+[21:10:44][main] - 加载服务版本号成功, bigVersion=1, smallVersion=0
+[21:10:45][main] - 本服serverId为10001,后台端口为8080
+[21:10:45][main] - init database connection pool……
+[21:10:45][main] - Proxool 0.9.1 (23-Aug-2008 11:10)
+[21:10:45][main] - Using default implementation for ThreadExecutor
+[21:10:45][main] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+[21:10:45][main] - Quartz Scheduler v.2.2.1 created.
+[21:10:45][main] - Registering Quartz Job Initialization Plug-in.
+[21:10:45][main] - RAMJobStore initialized.
+[21:10:45][main] - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'QuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 30 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+[21:10:45][main] - Quartz scheduler 'QuartzScheduler' initialized from the specified file : 'jobs/quartz.properties' from the class resource path.
+[21:10:45][main] - Quartz scheduler version: 2.2.1
+[21:10:45][main] - Parsing XML file: jobs/Jobs.xml with systemId: jobs/Jobs.xml
+[21:10:45][main] - Adding 1 jobs, 1 triggers.
+[21:10:45][main] - Adding job: DEFAULT.DailyResetJob
+[21:10:45][main] - Scheduler QuartzScheduler_$_NON_CLUSTERED started.
+[21:10:48][main] -  CREATE TABLE IF NOT EXISTS player (`id` bigint(32),`accountId` bigint(32),`name` varchar(128),`job` int(6),`level` int(11),`exp` bigint(32),`lastDailyReset` bigint(255),`vipRightJson` varchar(255),`platformJson` varchar(255),PRIMARY KEY(`id`) );
+[21:10:48][main] -  CREATE TABLE IF NOT EXISTS account (`id` bigint(32),`name` varchar(32),PRIMARY KEY(`id`) );
+[21:10:48][main] -  CREATE TABLE IF NOT EXISTS serverRecord (`key` varchar(255),`value` varchar(255),`comment` varchar(255),PRIMARY KEY(`key`) );
+[21:10:48][main] - 启动时每日重置
+[21:10:48][Shutdown Hook] - Shutting down 'data' pool immediately [Shutdown Hook]
+[21:10:48][Shutdown Hook] - Shutting down 'user' pool immediately [Shutdown Hook]
+[21:10:48][Shutdown Hook] - Stopping Prototyper thread
+[21:10:51][main] - 加载服务版本号成功, bigVersion=1, smallVersion=0
+[21:10:52][main] - 本服serverId为10001,后台端口为8080
+[21:10:52][main] - init database connection pool……
+[21:10:52][main] - Proxool 0.9.1 (23-Aug-2008 11:10)
+[21:10:52][main] - Using default implementation for ThreadExecutor
+[21:10:52][main] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+[21:10:52][main] - Quartz Scheduler v.2.2.1 created.
+[21:10:52][main] - Registering Quartz Job Initialization Plug-in.
+[21:10:52][main] - RAMJobStore initialized.
+[21:10:52][main] - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'QuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 30 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+[21:10:52][main] - Quartz scheduler 'QuartzScheduler' initialized from the specified file : 'jobs/quartz.properties' from the class resource path.
+[21:10:52][main] - Quartz scheduler version: 2.2.1
+[21:10:52][main] - Parsing XML file: jobs/Jobs.xml with systemId: jobs/Jobs.xml
+[21:10:52][main] - Adding 1 jobs, 1 triggers.
+[21:10:52][main] - Adding job: DEFAULT.DailyResetJob
+[21:10:52][main] - Scheduler QuartzScheduler_$_NON_CLUSTERED started.
+[21:10:53][main] -  CREATE TABLE IF NOT EXISTS serverRecord (`key` varchar(255),`value` varchar(255),`comment` varchar(255),PRIMARY KEY(`key`) );
+[21:10:53][main] -  CREATE TABLE IF NOT EXISTS player (`id` bigint(32),`accountId` bigint(32),`name` varchar(128),`job` int(6),`level` int(11),`exp` bigint(32),`lastDailyReset` bigint(255),`vipRightJson` varchar(255),`platformJson` varchar(255),PRIMARY KEY(`id`) );
+[21:10:53][main] -  CREATE TABLE IF NOT EXISTS account (`id` bigint(32),`name` varchar(32),PRIMARY KEY(`id`) );
+[21:10:53][main] - 启动时每日重置
+[21:10:55][main] - cross server start at port:9627,正在监听服务器点对点的连接...
+[21:10:55][main] - mina socket server start at port:9527,正在监听客户端的连接...
+[21:10:55][main] - 游戏服务启动，耗时[4005]毫秒

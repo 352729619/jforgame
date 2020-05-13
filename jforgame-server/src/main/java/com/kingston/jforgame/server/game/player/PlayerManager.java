@@ -4,6 +4,7 @@ import com.kingston.jforgame.common.utils.NumberUtil;
 import com.kingston.jforgame.server.cache.BaseCacheService;
 import com.kingston.jforgame.server.db.DbService;
 import com.kingston.jforgame.server.db.DbUtils;
+import com.kingston.jforgame.server.dbmanager.LoadDBManager;
 import com.kingston.jforgame.server.game.accout.entity.Account;
 import com.kingston.jforgame.server.game.accout.entity.AccountManager;
 import com.kingston.jforgame.server.game.core.MessagePusher;
@@ -37,7 +38,7 @@ import java.util.concurrent.ConcurrentMap;
  * 
  * @author kingston
  */
-public class PlayerManager extends BaseCacheService<Long, Player> {
+public class PlayerManager  {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -77,7 +78,7 @@ public class PlayerManager extends BaseCacheService<Long, Player> {
 
 		long accountId = baseInfo.getAccountId();
 		// 必须将account加载并缓存
-		Account account = AccountManager.getInstance().get(accountId);
+		Account account=LoadDBManager.getInstance().getEntity(accountId,Account.class);
 		accountProfiles.putIfAbsent(accountId, new AccountProfile());
 		AccountProfile accountProfile = accountProfiles.get(accountId);
 		accountProfile.addPlayerProfile(baseInfo);
@@ -88,7 +89,7 @@ public class PlayerManager extends BaseCacheService<Long, Player> {
 		if (accountProfile != null) {
 			return accountProfile;
 		}
-		Account account = AccountManager.getInstance().get(accountId);
+		Account account = LoadDBManager.getInstance().getEntity(accountId, Account.class);
 		if (account != null) {
 			accountProfile = new AccountProfile();
 			accountProfile.setAccountId(accountId);
@@ -125,7 +126,7 @@ public class PlayerManager extends BaseCacheService<Long, Player> {
 
 		long playerId = player.getId();
 		// 手动放入缓存
-		super.put(playerId, player);
+		LoadDBManager.getInstance().putCache(playerId,player);
 
 		DbService.getInstance().insertOrUpdate(player);
 
@@ -143,25 +144,13 @@ public class PlayerManager extends BaseCacheService<Long, Player> {
 		LoginManager.getInstance().handleSelectPlayer(session, playerId);
 	}
 
-	/**
-	 * 从用户表里读取玩家数据
-	 */
-	@Override
-	public Player load(Long playerId) throws Exception {
-		String sql = "SELECT * FROM Player where Id = ? ";
-//		sql = MessageFormat.format(sql, String.valueOf(playerId));
-		Player player = DbUtils.queryOneById(DbUtils.DB_USER, sql, Player.class, String.valueOf(playerId));
-		if (player != null) {
-			player.doAfterInit();
-		}
-		return player;
-	}
+
 
 	public Player getOnlinePlayer(long playerId) {
 		if (!onlines.containsKey(playerId)) {
 			return null;
 		}
-		return get(playerId);
+		return LoadDBManager.getInstance().getEntity(playerId,Player.class);
 	}
 
 	/**
@@ -215,7 +204,7 @@ public class PlayerManager extends BaseCacheService<Long, Player> {
 	}
 
 	public void playerLogout(long playerId) {
-		Player player = PlayerManager.getInstance().get(playerId);
+		Player player = LoadDBManager.getInstance().getEntity(playerId,Player.class);
 		if (player == null) {
 			return;
 		}

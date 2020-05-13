@@ -3,6 +3,7 @@ package com.kingston.jforgame.server.game.login;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kingston.jforgame.server.dbmanager.LoadDBManager;
 import com.kingston.jforgame.server.game.core.MessagePusher;
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -71,7 +72,7 @@ public class LoginManager {
 	 * @param playerId
 	 */
 	public void handleSelectPlayer(IdSession session, long playerId) {
-		Player player = PlayerManager.getInstance().get(playerId);
+		Player player = LoadDBManager.getInstance().getEntity(playerId,Player.class);
 		if (player != null) {
 			//绑定session与玩家id
 			session.setAttribute(IdSession.ID, playerId);

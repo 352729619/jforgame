@@ -3,6 +3,7 @@ package com.kingston.jforgame.server.game.function.facade;
 import java.util.List;
 import java.util.Set;
 
+import com.kingston.jforgame.server.dbmanager.LoadDBManager;
 import com.kingston.jforgame.server.game.database.config.ConfigDatasPool;
 import com.kingston.jforgame.server.game.database.config.bean.ConfigFunction;
 import com.kingston.jforgame.server.game.database.config.storage.ConfigFunctionStorage;
@@ -20,7 +21,7 @@ public class FunctionListener {
 	@EventHandler(value=EventType.PLAYER_LEVEL_UP)
 	public void onPlayerLevelup(PlayerLevelUpEvent levelUpEvent) {
 		long playerId = levelUpEvent.getPlayerId();
-		Player player = PlayerManager.getInstance().get(playerId);
+		Player player = LoadDBManager.getInstance().getEntity(playerId,Player.class);
 		Set<Integer> openFuncs = player.getFunction().getFuncs();
 
 		ConfigFunctionStorage functionStorage = ConfigDatasPool.getInstance().getStorage(ConfigFunctionStorage.class);

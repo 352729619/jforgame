@@ -1,11 +1,10 @@
 package com.kingston.jforgame.server.game.accout.entity;
 
-import com.kingston.jforgame.server.cache.BaseCacheService;
 import com.kingston.jforgame.server.db.DbService;
-import com.kingston.jforgame.server.db.DbUtils;
+import com.kingston.jforgame.server.dbmanager.LoadDBManager;
 import com.kingston.jforgame.server.game.player.PlayerManager;
 
-public class AccountManager extends BaseCacheService<Long, Account> {
+public class AccountManager  {
 
 	private static AccountManager instance = new AccountManager();
 
@@ -13,15 +12,9 @@ public class AccountManager extends BaseCacheService<Long, Account> {
 		return instance;
 	}
 
-	@Override
-	public Account load(Long accountId) throws Exception {
-		String sql = "SELECT * FROM account where id = ? ";
-		Account account = DbUtils.queryOneById(DbUtils.DB_USER, sql, Account.class, String.valueOf(accountId));
-		return account;
-	}
-	
+
 	public Account getOrCreate(long accountId) {
-		Account account = get(accountId);
+		Account account =LoadDBManager.getInstance().getEntity(accountId,Account.class);
 		if (account != null) {
 			return account;
 		}

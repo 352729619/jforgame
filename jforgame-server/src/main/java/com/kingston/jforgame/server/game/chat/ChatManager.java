@@ -1,5 +1,6 @@
 package com.kingston.jforgame.server.game.chat;
 
+import com.kingston.jforgame.server.dbmanager.LoadDBManager;
 import com.kingston.jforgame.server.game.chat.channel.ChannelType;
 import com.kingston.jforgame.server.game.chat.channel.ChatChannel;
 import com.kingston.jforgame.server.game.chat.model.TextChatMessage;
@@ -23,7 +24,7 @@ public class ChatManager {
 	}
 	
 	public void privateChat(long receiverId, String content) {
-		Player receiver = PlayerManager.getInstance().get(receiverId);
+		Player receiver = LoadDBManager.getInstance().getEntity(receiverId,Player.class);
 		if (receiver == null) {
 			return;
 		}

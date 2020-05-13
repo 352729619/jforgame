@@ -6,6 +6,7 @@ import com.kingston.jforgame.server.ServerConfig;
 import com.kingston.jforgame.server.cross.core.client.C2SSessionPoolFactory;
 import com.kingston.jforgame.server.cross.core.client.CCSession;
 import com.kingston.jforgame.server.cross.core.match.MatchHttpUtil;
+import com.kingston.jforgame.server.dbmanager.LoadDBManager;
 import com.kingston.jforgame.server.game.cross.ladder.message.Req_G2F_LadderTransfer;
 import com.kingston.jforgame.server.game.cross.ladder.message.Req_G2M_LadderApply;
 import com.kingston.jforgame.server.game.cross.ladder.message.vo.LadderMatchVo;
@@ -35,7 +36,7 @@ public class LadderClientManager {
 	
 	
 	public void apply(long playerId) {
-		Player player = PlayerManager.getInstance().get(playerId);
+		Player player = LoadDBManager.getInstance().getEntity(playerId,Player.class);
 		// 一堆业务判断
 		Req_G2M_LadderApply apply = new Req_G2M_LadderApply();
 		apply.setPlayerId(playerId);
@@ -52,11 +53,11 @@ public class LadderClientManager {
 	private void handleFight(LadderMatchVo matchVo) {
 		int selfServerId = ServerConfig.getInstance().getServerId();
 		if (matchVo.getBlueServerId() == selfServerId) {
-			Player player = PlayerManager.getInstance().get(matchVo.getBluePlayerId());
+			Player player = LoadDBManager.getInstance().getEntity(matchVo.getBluePlayerId(),Player.class);
 			transferToFight(player, matchVo);
 		}
 		if (matchVo.getRedServerId() == selfServerId) {
-			Player player = PlayerManager.getInstance().get(matchVo.getRedPlayerId());
+			Player player = LoadDBManager.getInstance().getEntity(matchVo.getBluePlayerId(),Player.class);
 			transferToFight(player, matchVo);
 		}
 	}

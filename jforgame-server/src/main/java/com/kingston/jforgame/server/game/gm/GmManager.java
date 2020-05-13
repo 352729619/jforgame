@@ -9,6 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.kingston.jforgame.common.utils.ClassScanner;
+import com.kingston.jforgame.server.dbmanager.LoadDBManager;
 import com.kingston.jforgame.server.game.core.MessagePusher;
 import com.kingston.jforgame.server.game.database.user.player.Player;
 import com.kingston.jforgame.server.game.gm.command.AbstractGmCommand;
@@ -60,7 +61,7 @@ public class GmManager {
 	 * @return
 	 */
 	public void receiveCommand(long playerId, String content) {
-		Player player = PlayerManager.getInstance().get(playerId);
+		Player player = LoadDBManager.getInstance().getEntity(playerId,Player.class);
 		//判断权限
 		if (!hasExecPower(player)) {
 			return;

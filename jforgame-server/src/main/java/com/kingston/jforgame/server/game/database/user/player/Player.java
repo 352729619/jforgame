@@ -59,8 +59,11 @@ public class Player extends BaseEntity implements Distributable {
     @Column
     private String vipRightJson;
 
-    @Column
+
     private Platform platform;
+
+    @Column
+    private String platformJson;
 
     //	@Column
     private String functionJson;
@@ -143,6 +146,14 @@ public class Player extends BaseEntity implements Distributable {
 
     public void setPlatform(Platform platform) {
         this.platform = platform;
+    }
+
+    public String getPlatformJson() {
+        return platformJson;
+    }
+
+    public void setPlatformJson(String platformJson) {
+        this.platformJson = platformJson;
     }
 
     public Function getFunction() {
